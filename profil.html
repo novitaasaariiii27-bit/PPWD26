@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profil - Novitasari</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6eedb;--card:#f0e3c6;--tan:#cba97d;--brown:#6b4a2f;--dark:#8a6240;--cream:#fbf6e9;--bad:#b5473a;--ok:#5f7f4e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--brown);font-family:'Fredoka',system-ui,sans-serif;line-height:1.45}
+main{max-width:980px;margin:0 auto;padding:16px 14px 50px}
+.banner{position:relative;overflow:hidden;background:var(--card);border-radius:16px;padding:22px;margin-bottom:14px;border:1px solid #e3d3ad}
+.banner::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;background:var(--tan);opacity:.55;right:-40px;top:-50px}
+.banner::after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;background:var(--tan);opacity:.4;left:-30px;bottom:-35px}
+.banner>*{position:relative;z-index:1}
+h1,h2{margin:0}
+h1{font-size:2rem;font-weight:700;letter-spacing:.02em}
+h2{font-size:1.15rem;font-weight:600;margin-bottom:10px}
+.script{font-family:'Caveat',cursive;font-size:1.5rem;color:var(--dark)}
+.hero{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hero small{display:block;font-size:.85rem}
+.bigico{font-size:3.6rem;background:var(--cream);width:110px;height:110px;border-radius:50%;display:grid;place-items:center;flex:none;border:4px solid var(--tan)}
+.sale{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--tan);color:#fff}
+.sale h2{font-size:1.9rem;color:#fff;margin:0}
+.sale .pill{background:var(--brown);color:#fff;border-radius:99px;padding:3px 14px;font-size:.8rem;display:inline-block}
+.sale .pct{background:var(--cream);color:var(--brown);font-size:1.8rem;font-weight:700;border-radius:50%;width:84px;height:84px;display:grid;place-items:center;flex:none}
+.policy{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.policy div{background:var(--card);border-radius:12px;padding:10px 4px;text-align:center;font-size:.78rem;border:1px solid #e3d3ad}
+.policy span{display:block;font-size:1.5rem}
+.cats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:6px 0 16px}
+.cat{background:none;border:0;cursor:pointer;font:inherit;color:var(--brown);font-size:.85rem;text-align:center;padding:0}
+.cat span{display:grid;place-items:center;width:68px;height:68px;border-radius:50%;background:var(--card);border:3px solid var(--tan);font-size:1.8rem;margin:0 auto 4px;transition:.2s}
+.cat.on span,.cat:hover span{background:var(--tan)}
+.cat.on{font-weight:600}
+.layout{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+@media(max-width:780px){.layout{grid-template-columns:1fr}.policy{grid-template-columns:repeat(2,1fr)}.hero .bigico{width:80px;height:80px;font-size:2.4rem}}
+.panel{background:var(--cream);border:1px solid #e3d3ad;border-radius:16px;padding:16px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.prod{background:var(--card);border-radius:14px;padding:10px;text-align:center;position:relative}
+.prod .pic{width:88px;height:88px;margin:4px auto 8px;border-radius:50%;background:var(--cream);border:3px solid var(--tan);display:grid;place-items:center;font-size:2.4rem}
+.prod b{display:block;font-weight:500;font-size:.92rem}
+.prod .hrg{color:var(--dark);font-weight:600;margin:2px 0 8px}
+.ribbon{position:absolute;top:8px;left:8px;background:var(--brown);color:#fff;font-size:.65rem;padding:1px 8px;border-radius:99px}
+button.btn{font:inherit;font-weight:500;font-size:.85rem;cursor:pointer;border-radius:99px;padding:6px 16px;border:2px solid var(--dark);background:var(--dark);color:#fff}
+button.btn.alt{background:transparent;color:var(--dark)}
+button.btn.sm{padding:0 9px}
+button:disabled{opacity:.4;cursor:not-allowed}
+button:hover:not(:disabled){filter:brightness(1.1)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--tan);outline-offset:2px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed var(--tan);font-size:.9rem}
+.qty{display:flex;align-items:center;gap:6px}
+.empty{color:#9a8268;font-size:.9rem}
+.total{margin:12px 0;font-size:1.25rem;font-weight:600}
+.total del{color:#a8977f;font-weight:400;margin-right:6px;font-size:1rem}
+.badge{display:inline-block;background:var(--ok);color:#fff;border-radius:99px;font-size:.7rem;padding:1px 10px;margin-left:6px;vertical-align:middle}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.hint{font-size:.8rem;color:#9a8268;margin:0 0 8px}
+#riwayat{list-style:none;margin:0 0 10px;padding:0;font-size:.85rem}
+#riwayat li{background:var(--card);border-radius:10px;padding:6px 12px;margin-top:6px}
+.success{display:none;background:var(--ok);color:#fff;border-radius:12px;padding:10px 14px;margin-bottom:12px}
+.follow{text-align:center;background:var(--card);border-radius:16px;padding:16px;margin-top:6px;font-weight:600;letter-spacing:.04em}
+#overlay{display:none;position:fixed;inset:0;background:rgba(80,55,30,.5);z-index:10;padding:16px;overflow:auto}
+.modal{background:var(--cream);max-width:440px;margin:6vh auto;border-radius:18px;padding:22px}
+label{display:block;font-weight:500;margin:12px 0 4px;font-size:.88rem}
+input,textarea{width:100%;font:inherit;padding:9px 14px;border:2px solid #e3d3ad;border-radius:12px;background:#fff;color:var(--brown)}
+input.invalid,textarea.invalid{border-color:var(--bad)}
+input.valid,textarea.valid{border-color:var(--ok)}
+.err{display:none;color:var(--bad);font-size:.8rem;margin-top:4px}
+.right{justify-content:flex-end;margin-top:16px}
+/* navigasi */
+nav{background:var(--cream);border-bottom:1px solid #e3d3ad;position:sticky;top:0;z-index:5}
+nav .in{max-width:980px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
+nav b{font-size:1.2rem;letter-spacing:.03em}
+nav a{color:var(--brown);text-decoration:none;padding:6px 16px;border-radius:99px;font-weight:500;margin-left:6px}
+nav a.on{background:var(--dark);color:#fff}
+nav a:hover:not(.on){background:var(--card)}
+a.btn{font:inherit;font-weight:500;font-size:.85rem;border-radius:99px;padding:6px 16px;border:2px solid var(--dark);background:var(--dark);color:#fff;text-decoration:none;display:inline-block;margin-top:8px}
+/* halaman profil */
+.wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:680px){.wrap{grid-template-columns:1fr}}
+.head{display:flex;gap:16px;align-items:center}
+.head h2{font-size:1.5rem;margin:0}
+.avatar{width:80px;height:80px;border-radius:50%;background:var(--tan);color:#fff;display:grid;place-items:center;font-size:2rem;font-weight:700;flex:none;border:4px solid var(--cream);box-shadow:0 0 0 3px var(--tan);transition:transform .2s,background .2s;cursor:pointer}
+.role{color:var(--dark)}
+.meta{margin:14px 0}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.tag{background:var(--card);border:1px solid #e3d3ad;font-size:.78rem;padding:3px 12px;border-radius:99px}
+#editBox{display:none;background:var(--card);border-radius:14px;padding:4px 14px 14px;margin-top:14px}
+#extra{display:none;background:var(--card);border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.9rem}
+#inbox{list-style:none;margin:12px 0 0;padding:0}
+#inbox li{background:var(--card);border-radius:10px;padding:8px 12px;margin-top:8px;font-size:.9rem;cursor:pointer}
+#inbox li small{color:#9a8268}
+code{background:var(--card);padding:1px 7px;border-radius:6px;font-size:.85rem}
+
+</style>
+</head>
+<body>
+<main>
+  <div class="banner hero">
+    <div>
+      <h1>PROFIL.KU</h1>
+      <div class="script">Kenalan dulu, yuk</div>
+      <small>Gabungan data profil, efek visual, dan validasi form</small>
+    </div>
+    <div class="bigico">&#128100;</div>
+  </div>
+
+  <div class="wrap">
+    <div class="panel" id="profileBox">
+      <div class="head">
+        <div class="avatar" id="avatar" title="Arahkan kursor ke sini">N</div>
+        <div><h2 id="pName">Novitasari</h2><div class="role" id="pRole">Mahasiswa Sistem Informasi</div></div>
+      </div>
+      <div class="meta">
+        <div>Alamat: <span id="pLoc">Pontianak, Indonesia</span></div>
+        <div>Email: <span id="pMail">novitaasaariiii27@gmail.com</span></div>
+      </div>
+      <div class="tags" id="skills"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">jQuery</span></div>
+      <div class="row">
+        <button class="btn" id="btnEdit">Ubah Profil</button>
+        <button class="btn alt" id="btnInfo">Info Tambahan</button>
+        <button class="btn alt" id="btnReset">Reset</button>
+      </div>
+      <div id="extra">Halo, aku Novitasari. Halaman ini dibuat dengan jQuery. Klik pesan pada daftar di kanan untuk menghapusnya.</div>
+      <form id="editBox" novalidate>
+        <label for="eName">Nama</label><input id="eName">
+        <div class="err" id="eErrName">Nama minimal 3 karakter.</div>
+        <label for="eRole">Profesi</label><input id="eRole">
+        <label for="eLoc">Alamat</label><input id="eLoc">
+        <label for="eMail">Email</label><input id="eMail">
+        <div class="err" id="eErrMail">Format email belum benar.</div>
+        <div class="row" style="margin-top:12px"><button type="submit" class="btn">Simpan</button><button type="button" id="btnCancel" class="btn alt">Batal</button></div>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h2>Tinggalkan Pesan</h2>
+      <form id="msgForm" novalidate>
+        <label for="mName">Nama</label><input id="mName" placeholder="Nama Anda">
+        <div class="err" id="mErrName">Nama minimal 3 karakter.</div>
+        <label for="mMail">Email</label><input id="mMail" placeholder="Email Anda">
+        <div class="err" id="mErrMail">Format email belum benar, contoh: nama@domain.com.</div>
+        <label for="mText">Pesan</label><textarea id="mText" rows="3" placeholder="Tulis pesan minimal 10 karakter"></textarea>
+        <div class="err" id="mErrText">Pesan minimal 10 karakter.</div>
+        <div class="row" style="margin-top:12px"><button type="submit" class="btn">Kirim</button></div>
+        <div class="success" id="mOk" style="margin-top:12px">Pesan terkirim. Terima kasih!</div>
+      </form>
+      <p style="margin:16px 0 0"><b>Pesan masuk (<span id="count">0</span>)</b></p>
+      <ul id="inbox"></ul>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Fitur jQuery yang digunakan</h2>
+    <ul>
+      <li><code>.text()</code>, <code>.html()</code>, <code>.css()</code>, <code>.val()</code> &mdash; manipulasi konten &amp; style</li>
+      <li><code>.click()</code>, <code>.submit()</code>, <code>.hover()</code>, <code>.on('input')</code> &mdash; event handling</li>
+      <li><code>.fadeIn()</code>, <code>.fadeOut()</code>, <code>.slideToggle()</code>, <code>.slideDown()</code> &mdash; efek visual</li>
+      <li><code>.show()</code>, <code>.hide()</code>, <code>.toggle()</code> &mdash; validasi feedback</li>
+      <li><code>.append()</code>, <code>.prepend()</code>, <code>.remove()</code> &mdash; menambah &amp; menghapus elemen</li>
+    </ul>
+  </div>
+</main>
+<script>
+$(function () {
+  const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const awal = { nama: 'Novitasari', peran: 'Peserta Praktikum jQuery', lokasi: 'Pontianak, Indonesia', mail: 'novitaasaariiii27@gmail.com' };
+
+  // ----- tampilkan data profil ke halaman -----
+  function tampil(d) {
+    $('#pName').text(d.nama);
+    $('#pRole').text(d.peran);
+    $('#pLoc').text(d.lokasi);
+    $('#pMail').text(d.mail);
+    $('#avatar').text(d.nama.charAt(0).toUpperCase());
+  }
+
+  // ----- hover pada avatar -----
+  $('#avatar').hover(
+    function () { $(this).css({ transform: 'scale(1.12)', background: '#6b4a2f' }); },
+    function () { $(this).css({ transform: '', background: '' }); }
+  );
+
+  // ----- info tambahan: slideToggle -----
+  $('#btnInfo').click(function () { $('#extra').slideToggle(300); });
+
+  // ----- ubah profil: buka form, isi dengan data sekarang -----
+  $('#btnEdit').click(function () {
+    $('#eName').val($('#pName').text());
+    $('#eRole').val($('#pRole').text());
+    $('#eLoc').val($('#pLoc').text());
+    $('#eMail').val($('#pMail').text());
+    $('#editBox .err').hide();
+    $('#editBox').slideDown(300);
+  });
+  $('#btnCancel').click(function () { $('#editBox').slideUp(250); });
+
+  $('#editBox').submit(function (e) {
+    e.preventDefault();
+    const a = $('#eName').val().trim().length >= 3;
+    const b = emailOk($('#eMail').val().trim());
+    $('#eErrName').toggle(!a);
+    $('#eErrMail').toggle(!b);
+    if (!(a && b)) return;
+    const d = {
+      nama: $('#eName').val().trim(),
+      peran: $('#eRole').val().trim() || awal.peran,
+      lokasi: $('#eLoc').val().trim() || awal.lokasi,
+      mail: $('#eMail').val().trim()
+    };
+    $('#profileBox .head, #profileBox .meta').fadeOut(200, function () { tampil(d); $(this).fadeIn(300); });
+    $('#editBox').slideUp(250);
+  });
+
+  $('#btnReset').click(function () {
+    $('#profileBox .head, #profileBox .meta').fadeOut(200, function () { tampil(awal); $(this).fadeIn(300); });
+    $('#editBox').slideUp(250);
+    $('#extra').slideUp(250);
+  });
+
+  // ----- validasi form pesan (real-time + submit) -----
+  const rules = [
+    { el: '#mName', err: '#mErrName', ok: v => v.trim().length >= 3 },
+    { el: '#mMail', err: '#mErrMail', ok: v => emailOk(v.trim()) },
+    { el: '#mText', err: '#mErrText', ok: v => v.trim().length >= 10 }
+  ];
+  function cek(r) {
+    const good = r.ok($(r.el).val());
+    $(r.err).toggle(!good);
+    $(r.el).toggleClass('invalid', !good).toggleClass('valid', good);
+    return good;
+  }
+  $.each(rules, function (_, r) { $(r.el).on('input', function () { cek(r); }); });
+
+  let jumlah = 0;
+  $('#msgForm').submit(function (e) {
+    e.preventDefault();
+    let valid = true;
+    $.each(rules, function (_, r) { if (!cek(r)) valid = false; });
+    if (!valid) return;
+
+    // tambahkan pesan ke daftar (paling baru di atas)
+    const jam = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+    const $li = $('<li></li>').hide()
+      .append($('<strong></strong>').text($('#mName').val().trim()))
+      .append(' <small>(' + jam + ')</small><br>')
+      .append($('<span></span>').text($('#mText').val().trim()));
+    $('#inbox').prepend($li);
+    $li.slideDown(250);
+    $('#count').text(++jumlah);
+
+    $('#mOk').fadeIn().delay(2000).fadeOut();
+    this.reset();
+    $('#msgForm input, #msgForm textarea').removeClass('valid invalid');
+  });
+
+  // klik pesan untuk menghapus
+  $('#inbox').on('click', 'li', function () {
+    $(this).fadeOut(250, function () { $(this).remove(); $('#count').text(--jumlah); });
+  });
+});
+</script>
+</body>
+</html>
