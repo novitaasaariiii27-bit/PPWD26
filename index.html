@@ -1,120 +1,311 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toko Mini - Belanja Praktis Setiap Hari</title>
-
-  <!-- jQuery CDN -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <!-- Font Awesome untuk ikon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- CSS Eksternal -->
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toko Mini - Keranjang Belanja</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6eedb;--card:#f0e3c6;--tan:#cba97d;--brown:#6b4a2f;--dark:#8a6240;--cream:#fbf6e9;--bad:#b5473a;--ok:#5f7f4e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--brown);font-family:'Fredoka',system-ui,sans-serif;line-height:1.45}
+main{max-width:980px;margin:0 auto;padding:16px 14px 50px}
+.banner{position:relative;overflow:hidden;background:var(--card);border-radius:16px;padding:22px;margin-bottom:14px;border:1px solid #e3d3ad}
+.banner::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;background:var(--tan);opacity:.55;right:-40px;top:-50px}
+.banner::after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;background:var(--tan);opacity:.4;left:-30px;bottom:-35px}
+.banner>*{position:relative;z-index:1}
+h1,h2{margin:0}
+h1{font-size:2rem;font-weight:700;letter-spacing:.02em}
+h2{font-size:1.15rem;font-weight:600;margin-bottom:10px}
+.script{font-family:'Caveat',cursive;font-size:1.5rem;color:var(--dark)}
+.hero{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hero small{display:block;font-size:.85rem}
+.bigico{font-size:3.6rem;background:var(--cream);width:110px;height:110px;border-radius:50%;display:grid;place-items:center;flex:none;border:4px solid var(--tan)}
+.sale{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--tan);color:#fff}
+.sale h2{font-size:1.9rem;color:#fff;margin:0}
+.sale .pill{background:var(--brown);color:#fff;border-radius:99px;padding:3px 14px;font-size:.8rem;display:inline-block}
+.sale .pct{background:var(--cream);color:var(--brown);font-size:1.8rem;font-weight:700;border-radius:50%;width:84px;height:84px;display:grid;place-items:center;flex:none}
+.policy{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.policy div{background:var(--card);border-radius:12px;padding:10px 4px;text-align:center;font-size:.78rem;border:1px solid #e3d3ad}
+.policy span{display:block;font-size:1.5rem}
+.cats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:6px 0 16px}
+.cat{background:none;border:0;cursor:pointer;font:inherit;color:var(--brown);font-size:.85rem;text-align:center;padding:0}
+.cat span{display:grid;place-items:center;width:68px;height:68px;border-radius:50%;background:var(--card);border:3px solid var(--tan);font-size:1.8rem;margin:0 auto 4px;transition:.2s}
+.cat.on span,.cat:hover span{background:var(--tan)}
+.cat.on{font-weight:600}
+.layout{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+@media(max-width:780px){.layout{grid-template-columns:1fr}.policy{grid-template-columns:repeat(2,1fr)}.hero .bigico{width:80px;height:80px;font-size:2.4rem}}
+.panel{background:var(--cream);border:1px solid #e3d3ad;border-radius:16px;padding:16px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.prod{background:var(--card);border-radius:14px;padding:10px;text-align:center;position:relative}
+.prod .pic{width:88px;height:88px;margin:4px auto 8px;border-radius:50%;background:var(--cream);border:3px solid var(--tan);display:grid;place-items:center;font-size:2.4rem}
+.prod b{display:block;font-weight:500;font-size:.92rem}
+.prod .hrg{color:var(--dark);font-weight:600;margin:2px 0 8px}
+.ribbon{position:absolute;top:8px;left:8px;background:var(--brown);color:#fff;font-size:.65rem;padding:1px 8px;border-radius:99px}
+button.btn{font:inherit;font-weight:500;font-size:.85rem;cursor:pointer;border-radius:99px;padding:6px 16px;border:2px solid var(--dark);background:var(--dark);color:#fff}
+button.btn.alt{background:transparent;color:var(--dark)}
+button.btn.sm{padding:0 9px}
+button:disabled{opacity:.4;cursor:not-allowed}
+button:hover:not(:disabled){filter:brightness(1.1)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--tan);outline-offset:2px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed var(--tan);font-size:.9rem}
+.qty{display:flex;align-items:center;gap:6px}
+.empty{color:#9a8268;font-size:.9rem}
+.total{margin:12px 0;font-size:1.25rem;font-weight:600}
+.total del{color:#a8977f;font-weight:400;margin-right:6px;font-size:1rem}
+.badge{display:inline-block;background:var(--ok);color:#fff;border-radius:99px;font-size:.7rem;padding:1px 10px;margin-left:6px;vertical-align:middle}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.hint{font-size:.8rem;color:#9a8268;margin:0 0 8px}
+#riwayat{list-style:none;margin:0 0 10px;padding:0;font-size:.85rem}
+#riwayat li{background:var(--card);border-radius:10px;padding:6px 12px;margin-top:6px}
+.success{display:none;background:var(--ok);color:#fff;border-radius:12px;padding:10px 14px;margin-bottom:12px}
+.follow{text-align:center;background:var(--card);border-radius:16px;padding:16px;margin-top:6px;font-weight:600;letter-spacing:.04em}
+#overlay{display:none;position:fixed;inset:0;background:rgba(80,55,30,.5);z-index:10;padding:16px;overflow:auto}
+.modal{background:var(--cream);max-width:440px;margin:6vh auto;border-radius:18px;padding:22px}
+label{display:block;font-weight:500;margin:12px 0 4px;font-size:.88rem}
+input,textarea{width:100%;font:inherit;padding:9px 14px;border:2px solid #e3d3ad;border-radius:12px;background:#fff;color:var(--brown)}
+input.invalid,textarea.invalid{border-color:var(--bad)}
+input.valid,textarea.valid{border-color:var(--ok)}
+.err{display:none;color:var(--bad);font-size:.8rem;margin-top:4px}
+.right{justify-content:flex-end;margin-top:16px}
+</style>
 </head>
 <body>
+<main>
+  <div class="success" id="okMsg"></div>
 
-  <!-- ========== NAVBAR ========== -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="logo"><i class="fas fa-store"></i><span>Toko Mini</span></div>
-      <div class="nav-menu" id="navMenu">
-        <a class="nav-link active" data-filter="all">Semua</a>
-        <a class="nav-link" data-filter="alat-tulis">Alat Tulis</a>
-        <a class="nav-link" data-filter="aksesoris">Aksesoris</a>
-        <a class="nav-link" data-filter="elektronik">Elektronik</a>
-      </div>
-      <div class="cart-btn" id="cartBtn">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-text">Keranjang</span>
-        <span class="cart-badge" id="cartBadge">0</span>
-      </div>
-      <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+  <!-- Banner toko -->
+  <div class="banner hero">
+    <div>
+      <h1>TOKO.MINI</h1>
+      <div class="script">Belanja mudah, hati senang</div>
+      <small>Buka setiap hari 08.00 - 21.00</small>
+      <small>Pontianak, Kalimantan Barat</small>
     </div>
-  </nav>
-
-  <!-- ========== HERO SECTION ========== -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Selamat Datang di <span>Toko Mini</span> 🛍️</h1>
-      <p>Pilih barang favoritmu, tambahkan ke keranjang, lalu checkout dengan mudah!</p>
-      <div class="search-box">
-        <input type="text" id="searchProduk" placeholder="Cari produk favoritmu...">
-        <i class="fas fa-search"></i>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PRODUK SECTION ========== -->
-  <section class="produk-section">
-    <div class="section-header">
-      <h2><i class="fas fa-list"></i> Menu Kami</h2>
-      <div class="filter-btns">
-        <button class="filter-btn active" data-cat="all">Semua</button>
-        <button class="filter-btn" data-cat="alat-tulis">Alat Tulis</button>
-        <button class="filter-btn" data-cat="aksesoris">Aksesoris</button>
-        <button class="filter-btn" data-cat="elektronik">Elektronik</button>
-      </div>
-    </div>
-    <!-- Grid produk akan di-render oleh jQuery -->
-    <div class="produk-grid" id="produkGrid"></div>
-  </section>
-
-  <!-- ========== CART SIDEBAR ========== -->
-  <div class="cart-overlay" id="cartOverlay"></div>
-  <aside class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-      <h3><i class="fas fa-shopping-bag"></i> Keranjang Belanja</h3>
-      <button class="cart-close" id="cartClose"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="cart-items" id="cartItems"><!-- Item keranjang di-render oleh jQuery --></div>
-    <div class="cart-footer">
-      <div class="cart-total">
-        <span>Total:</span>
-        <span class="total-price" id="cartTotal">Rp 0</span>
-      </div>
-      <button class="btn-checkout" id="btnCheckout"><i class="fas fa-check-circle"></i> Checkout Sekarang</button>
-      <!-- Latihan 2: tampilan riwayat dari localStorage -->
-      <button class="btn-riwayat" id="btnRiwayat"><i class="fas fa-history"></i> Riwayat Belanja</button>
-      <ul class="riwayat-list" id="riwayatList"></ul>
-    </div>
-  </aside>
-
-  <!-- ========== LATIHAN 3: MODAL DATA PEMBELI ========== -->
-  <div class="modal-overlay" id="checkoutModal">
-    <form class="modal-box" id="buyerForm" novalidate>
-      <h3><i class="fas fa-user"></i> Data Pembeli</h3>
-      <label for="bNama">Nama</label>
-      <input type="text" id="bNama" placeholder="Nama lengkap">
-      <div class="err" id="errNama">Nama minimal 3 karakter.</div>
-      <label for="bAlamat">Alamat</label>
-      <textarea id="bAlamat" rows="3" placeholder="Alamat pengiriman"></textarea>
-      <div class="err" id="errAlamat">Alamat minimal 10 karakter.</div>
-      <label for="bHp">No HP</label>
-      <input type="text" id="bHp" inputmode="numeric" placeholder="08xxxxxxxxxx">
-      <div class="err" id="errHp">No HP harus diawali 08 dan 10-13 digit angka.</div>
-      <div class="modal-actions">
-        <button type="button" class="btn-batal" id="btnBatal">Batal</button>
-        <button type="submit" class="btn-bayar" id="btnBayar"><i class="fas fa-check-circle"></i> Bayar Sekarang</button>
-      </div>
-    </form>
+    <div class="bigico">&#128717;</div>
   </div>
 
-  <!-- ========== TOAST NOTIFICATION ========== -->
-  <div class="toast" id="toast">
-    <i class="fas fa-check-circle"></i>
-    <span id="toastMsg">Produk ditambahkan!</span>
+  <!-- Banner sale (Latihan 1) -->
+  <div class="banner sale">
+    <div>
+      <span class="pill">Promo spesial</span>
+      <h2>DISKON 10%</h2>
+      <small>Otomatis untuk total belanja di atas Rp 100.000</small>
+    </div>
+    <div class="pct">10%</div>
   </div>
 
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <p><strong>Toko Mini</strong> © 2026</p>
-    <p>Praktikum Pemrograman Web Dasar · Prodi Sistem Informasi</p>
-  </footer>
+  <div class="policy">
+    <div><span>&#128666;</span>Kirim cepat</div>
+    <div><span>&#128274;</span>Bayar aman</div>
+    <div><span>&#128260;</span>Retur mudah</div>
+    <div><span>&#128172;</span>Admin ramah</div>
+  </div>
 
-  <!-- JavaScript Eksternal -->
-  <script src="script.js"></script>
+  <!-- Kategori: filter produk -->
+  <div class="cats" id="cats">
+    <button class="cat on" data-kat="semua"><span>&#128717;</span>Semua</button>
+    <button class="cat" data-kat="alat"><span>&#9999;&#65039;</span>Alat Tulis</button>
+    <button class="cat" data-kat="tas"><span>&#127890;</span>Tas</button>
+    <button class="cat" data-kat="elektronik"><span>&#127911;</span>Elektronik</button>
+    <button class="cat" data-kat="minum"><span>&#129524;</span>Minum</button>
+  </div>
+
+  <div class="layout">
+    <div>
+      <div class="panel">
+        <h2>Produk Pilihan</h2>
+        <div class="grid" id="productList"></div>
+      </div>
+      <div class="panel">
+        <h2>Riwayat Belanja</h2>
+        <ul id="riwayat"></ul>
+        <button class="btn alt" id="btnHapusRiwayat">Hapus Riwayat</button>
+      </div>
+    </div>
+
+    <div class="panel" style="align-self:start">
+      <h2>Keranjang (<span id="cartCount">0</span>)</h2>
+      <div id="cartItems"></div>
+      <div class="total" id="cartTotal">Rp 0</div>
+      <div class="row">
+        <button class="btn" id="btnCheckout" disabled>Checkout</button>
+        <button class="btn alt" id="btnKosongkan">Kosongkan</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="follow">IKUTI TOKO KAMI &#8226; DAPATKAN VOUCHER SETIAP MINGGU</div>
+</main>
+
+<!-- Modal data pembeli (Latihan 3) -->
+<div id="overlay">
+  <form class="modal" id="buyerForm" novalidate>
+    <h2>Data Pembeli</h2>
+    <label for="bNama">Nama</label>
+    <input id="bNama" placeholder="Nama lengkap">
+    <div class="err" id="errNama">Nama minimal 3 karakter.</div>
+    <label for="bAlamat">Alamat</label>
+    <textarea id="bAlamat" rows="3" placeholder="Alamat pengiriman"></textarea>
+    <div class="err" id="errAlamat">Alamat minimal 10 karakter.</div>
+    <label for="bHp">No HP</label>
+    <input id="bHp" placeholder="08xxxxxxxxxx" inputmode="numeric">
+    <div class="err" id="errHp">No HP harus diawali 08 dan 10-13 digit angka.</div>
+    <div class="row right">
+      <button type="button" class="btn alt" id="btnBatal">Batal</button>
+      <button type="submit" class="btn">Bayar Sekarang</button>
+    </div>
+  </form>
+</div>
+
+<script>
+$(function () {
+  const produk = [
+    { id: 1, nama: 'Buku Tulis',     harga: 12000,  kat: 'alat',       ico: '\u{1F4D3}', label: 'New Arrival' },
+    { id: 2, nama: 'Pulpen Gel',     harga: 8000,   kat: 'alat',       ico: '\u{1F58A}\uFE0F', label: '' },
+    { id: 3, nama: 'Tas Ransel',     harga: 150000, kat: 'tas',        ico: '\u{1F392}', label: 'Best Seller' },
+    { id: 4, nama: 'Botol Minum',    harga: 45000,  kat: 'minum',      ico: '\u{1F9F4}', label: '' },
+    { id: 5, nama: 'Mouse Wireless', harga: 75000,  kat: 'elektronik', ico: '\u{1F5B1}\uFE0F', label: 'New Arrival' },
+    { id: 6, nama: 'Headset',        harga: 120000, kat: 'elektronik', ico: '\u{1F3A7}', label: 'Best Seller' }
+  ];
+  let cart = [];
+  const rp = n => 'Rp ' + n.toLocaleString('id-ID');
+
+  // ---------- tampilkan produk (bisa difilter kategori) ----------
+  function tampilProduk(kat) {
+    const $g = $('#productList').empty();
+    $.each(produk, function (_, p) {
+      if (kat !== 'semua' && p.kat !== kat) return;
+      $g.append(
+        `<div class="prod">${p.label ? `<span class="ribbon">${p.label}</span>` : ''}
+         <div class="pic">${p.ico}</div><b>${p.nama}</b><div class="hrg">${rp(p.harga)}</div>
+         <button class="btn btnTambah" data-id="${p.id}">+ Keranjang</button></div>`
+      );
+    });
+    $g.hide().fadeIn(250);
+  }
+  $('#cats').on('click', '.cat', function () {
+    $('.cat').removeClass('on'); $(this).addClass('on');
+    tampilProduk($(this).data('kat'));
+  });
+
+  $('#productList').on('click', '.btnTambah', function () {
+    const id = $(this).data('id');
+    const ada = cart.find(i => i.id === id);
+    if (ada) ada.qty++;
+    else { const p = produk.find(x => x.id === id); cart.push({ ...p, qty: 1 }); }
+    updateCartUI();
+  });
+
+  $('#cartItems').on('click', 'button', function () {
+    const id = $(this).data('id'), aksi = $(this).data('aksi');
+    const item = cart.find(i => i.id === id);
+    if (aksi === 'plus') item.qty++;
+    if (aksi === 'minus') item.qty--;
+    if (aksi === 'hapus') item.qty = 0;
+    cart = cart.filter(i => i.qty > 0);
+    updateCartUI();
+  });
+  $('#btnKosongkan').click(function () { cart = []; updateCartUI(); });
+
+  // ---------- updateCartUI + Latihan 1 (diskon 10%) ----------
+  function updateCartUI() {
+    const $list = $('#cartItems').empty();
+    if (!cart.length) $list.html('<p class="empty">Keranjang masih kosong. Pilih produk dulu ya.</p>');
+    $.each(cart, function (_, i) {
+      $list.append(
+        `<div class="item"><div><b>${i.ico} ${i.nama}</b><br>${rp(i.harga)}</div>
+         <div class="qty">
+           <button class="btn alt sm" data-aksi="minus" data-id="${i.id}">-</button>${i.qty}
+           <button class="btn alt sm" data-aksi="plus" data-id="${i.id}">+</button>
+           <button class="btn sm" data-aksi="hapus" data-id="${i.id}" title="Hapus">x</button>
+         </div></div>`
+      );
+    });
+
+    let totalHarga = cart.reduce((sum, item) => sum + (item.harga * item.qty), 0);
+    $('#cartTotal').text(rp(totalHarga));
+
+    if (totalHarga > 100000) {
+      const diskon = totalHarga * 0.1;
+      totalHarga -= diskon;
+      $('#cartTotal').html(`
+        <del>${rp(totalHarga + diskon)}</del>
+        <strong>${rp(totalHarga)}</strong><span class="badge">Hemat ${rp(diskon)}</span>
+      `);
+    }
+    $('#cartCount').text(cart.reduce((s, i) => s + i.qty, 0));
+    $('#btnCheckout').prop('disabled', !cart.length);
+  }
+  function hitungTotal() {
+    const t = cart.reduce((s, i) => s + i.harga * i.qty, 0);
+    return t > 100000 ? t * 0.9 : t;
+  }
+  const hitungQty = () => cart.reduce((s, i) => s + i.qty, 0);
+
+  // ---------- Latihan 2: riwayat di localStorage ----------
+  function simpanRiwayat(total, qty) {
+    const riwayat = JSON.parse(localStorage.getItem('riwayat')) || [];
+    riwayat.push({ tanggal: new Date().toISOString(), total, qty });
+    localStorage.setItem('riwayat', JSON.stringify(riwayat));
+  }
+  function tampilRiwayat() {
+    const riwayat = JSON.parse(localStorage.getItem('riwayat')) || [];
+    const $ul = $('#riwayat').empty();
+    if (!riwayat.length) { $ul.html('<li class="empty">Belum ada transaksi.</li>'); return; }
+    $.each(riwayat.slice().reverse(), function (_, r) {
+      const tgl = new Date(r.tanggal).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+      $ul.append(`<li>${tgl} &mdash; ${r.qty} barang, <b>${rp(r.total)}</b></li>`);
+    });
+  }
+  $('#btnHapusRiwayat').click(function () { localStorage.removeItem('riwayat'); tampilRiwayat(); });
+
+  // ---------- Latihan 3: modal + validasi pembeli ----------
+  const rules = [
+    { el: '#bNama',   err: '#errNama',   ok: v => v.trim().length >= 3 },
+    { el: '#bAlamat', err: '#errAlamat', ok: v => v.trim().length >= 10 },
+    { el: '#bHp',     err: '#errHp',     ok: v => /^08\d{8,11}$/.test(v.trim()) }
+  ];
+  function cek(r) {
+    const good = r.ok($(r.el).val());
+    $(r.err).toggle(!good);
+    $(r.el).toggleClass('invalid', !good).toggleClass('valid', good);
+    return good;
+  }
+  $.each(rules, function (_, r) { $(r.el).on('input', function () { cek(r); }); });
+
+  function tutupModal() { $('#overlay').fadeOut(200); }
+  $('#btnCheckout').click(function () {
+    $('#buyerForm')[0].reset();
+    $('#buyerForm .err').hide();
+    $('#buyerForm input, #buyerForm textarea').removeClass('valid invalid');
+    $('#overlay').fadeIn(200);
+    $('#bNama').focus();
+  });
+  $('#btnBatal').click(tutupModal);
+  $(document).keydown(e => { if (e.key === 'Escape') tutupModal(); });
+
+  $('#buyerForm').submit(function (e) {
+    e.preventDefault();
+    let valid = true;
+    $.each(rules, function (_, r) { if (!cek(r)) valid = false; });
+    if (!valid) return;
+
+    const total = hitungTotal(), qty = hitungQty();
+    simpanRiwayat(total, qty);
+    $('#okMsg').text(`Terima kasih, ${$('#bNama').val().trim()}! Pesanan ${qty} barang (${rp(total)}) berhasil.`)
+      .fadeIn().delay(3500).fadeOut();
+    cart = [];
+    updateCartUI();
+    tampilRiwayat();
+    tutupModal();
+  });
+
+  tampilProduk('semua');
+  updateCartUI();
+  tampilRiwayat();
+});
+</script>
 </body>
 </html>
