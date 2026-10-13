@@ -1,0 +1,17 @@
+name: Deploy to Teacher Server
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Trigger aaPanel Webhook
+        uses: tunnaduong/aapanel-deploy-action@v1.0
+        with:
+          panel_url: https://103.171.84.81:25181
+          webhook_key: ${{ secrets.wvgzBAjmG4N5qQ8E2b8HCqlwBN951CuCZH2m03G1EsueAmR4 }}
