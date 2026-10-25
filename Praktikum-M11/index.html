@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosaria Florist | Toko Bunga</title>
+
+  <!-- Google Fonts: Playfair Display (judul), Great Vibes (tulisan tangan), Poppins (isi) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS eksternal -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- CDN jQuery & jQuery Validation Plugin -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+</head>
+<body>
+
+  <!-- ===== TOPBAR ===== -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>📍 Jl. Melati No. 15</span>
+      <span>🚚 Pengiriman setiap hari 08.00 - 21.00</span>
+      <span>📞 +62 812-3456-7890</span>
+    </div>
+  </div>
+
+  <!-- ===== NAVBAR + DROPDOWN (Effect: slideDown / slideUp) ===== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#beranda" class="logo">
+        <span class="logo-ikon">🌸</span>
+        <span class="logo-teks"><strong>Rosaria</strong><small>bunga dengan cinta</small></span>
+      </a>
+
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#beranda">Beranda</a></li>
+          <li class="dropdown">
+            <button class="dropdown-btn" type="button">Katalog ▾</button>
+            <ul class="dropdown-menu">
+              <li><a href="#katalog" data-tab="#tab-buket">Buket</a></li>
+              <li><a href="#katalog" data-tab="#tab-box">Bunga Box</a></li>
+              <li><a href="#katalog" data-tab="#tab-wedding">Pernikahan</a></li>
+              <li><a href="#katalog" data-tab="#tab-hadiah">Hadiah</a></li>
+            </ul>
+          </li>
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#pesan">Pesan</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-keranjang-nav" id="btnKeranjang" type="button">🛒 Keranjang <span id="jumlahKeranjang">0</span></button>
+    </div>
+  </header>
+
+  <!-- ===== HERO SLIDER (Effect: fadeIn / fadeOut) ===== -->
+  <section id="beranda" class="hero">
+    <div class="container">
+      <div class="hero-slides">
+
+        <div class="hero-slide">
+          <div class="hero-grid">
+            <div class="hero-teks">
+              <span class="script">Glow softly, bloom beautifully</span>
+              <h1>Hadirkan Senyum dengan Bunga Segar</h1>
+              <p>Buket cantik untuk setiap momen spesial, dirangkai dari bunga segar pilihan dan dikirim langsung ke tujuan.</p>
+              <a href="#katalog" class="btn-utama">Pilih Buket</a>
+            </div>
+            <div class="hero-visual">
+              <div class="lingkaran">💐</div>
+              <span class="mengambang m1">🌸</span>
+              <span class="mengambang m2">✨</span>
+              <span class="mengambang m3">🌷</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-slide">
+          <div class="hero-grid">
+            <div class="hero-teks">
+              <span class="script">Hari bahagia, bunga terbaik</span>
+              <h1>Buket Pernikahan Impian Anda</h1>
+              <p>Hand bouquet, buket pengantin, hingga dekorasi meja akad dengan sentuhan lembut dan elegan.</p>
+              <a href="#katalog" class="btn-utama" data-tab="#tab-wedding">Lihat Koleksi</a>
+            </div>
+            <div class="hero-visual">
+              <div class="lingkaran">🌹</div>
+              <span class="mengambang m1">💍</span>
+              <span class="mengambang m2">🤍</span>
+              <span class="mengambang m3">🌸</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-slide">
+          <div class="hero-grid">
+            <div class="hero-teks">
+              <span class="script">Kejutan manis untuk tersayang</span>
+              <h1>Kado Bunga yang Penuh Makna</h1>
+              <p>Padukan buket dengan boneka atau cokelat, lengkap dengan kartu ucapan gratis.</p>
+              <a href="#katalog" class="btn-utama" data-tab="#tab-hadiah">Cari Hadiah</a>
+            </div>
+            <div class="hero-visual">
+              <div class="lingkaran">🎁</div>
+              <span class="mengambang m1">🌷</span>
+              <span class="mengambang m2">🎀</span>
+              <span class="mengambang m3">✨</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="hero-dots">
+        <button class="dot aktif" type="button" data-ke="0" aria-label="Slide 1"></button>
+        <button class="dot" type="button" data-ke="1" aria-label="Slide 2"></button>
+        <button class="dot" type="button" data-ke="2" aria-label="Slide 3"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KEUNGGULAN ===== -->
+  <section class="keunggulan">
+    <div class="container grid-4">
+      <div class="unggul"><span class="unggul-ikon">🚚</span><div><h4>Pengiriman Cepat</h4><p>Sampai dalam 90 menit untuk area dalam kota</p></div></div>
+      <div class="unggul"><span class="unggul-ikon">🌿</span><div><h4>Bunga Segar</h4><p>Stok datang setiap hari langsung dari kebun</p></div></div>
+      <div class="unggul"><span class="unggul-ikon">🛡️</span><div><h4>Garansi Kualitas</h4><p>Tukar atau kembalikan dalam 7 hari</p></div></div>
+      <div class="unggul"><span class="unggul-ikon">💳</span><div><h4>Pembayaran Mudah</h4><p>Transfer, e-wallet, atau bayar di tempat</p></div></div>
+    </div>
+  </section>
+
+  <!-- ===== KATALOG DENGAN TAB (Event: click, Effect: fadeIn) ===== -->
+  <section id="katalog" class="container seksi">
+    <div class="judul-seksi">
+      <span class="script">pilihan terbaik kami</span>
+      <h2>Katalog Bunga</h2>
+    </div>
+
+    <div class="tabs">
+      <button class="tab aktif" type="button" data-target="#tab-buket">💐 Buket</button>
+      <button class="tab" type="button" data-target="#tab-box">🎀 Bunga Box</button>
+      <button class="tab" type="button" data-target="#tab-wedding">💍 Pernikahan</button>
+      <button class="tab" type="button" data-target="#tab-hadiah">🎁 Hadiah</button>
+    </div>
+
+    <!-- Panel 1: Buket -->
+    <div id="tab-buket" class="tab-panel grid-produk">
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-1"><span>💐</span></div>
+        <div class="produk-info">
+          <h3>Kelembutan</h3>
+          <p>Mawar pink dan baby's breath dengan wrapping lembut.</p>
+          <div class="produk-bawah"><span class="harga">Rp 185.000</span><button class="btn-keranjang" type="button" data-nama="Kelembutan">+ Keranjang</button></div>
+        </div>
+      </article>
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-5"><span>🌹</span></div>
+        <div class="produk-info">
+          <h3>Romansa</h3>
+          <p>Mawar merah muda dengan pita satin untuk momen romantis.</p>
+          <div class="produk-bawah"><span class="harga">Rp 225.000</span><button class="btn-keranjang" type="button" data-nama="Romansa">+ Keranjang</button></div>
+        </div>
+      </article>
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-3"><span>🌼</span></div>
+        <div class="produk-info">
+          <h3>Putih Klasik</h3>
+          <p>Mawar putih dan daun eucalyptus, simpel dan elegan.</p>
+          <div class="produk-bawah"><span class="harga">Rp 175.000</span><button class="btn-keranjang" type="button" data-nama="Putih Klasik">+ Keranjang</button></div>
+        </div>
+      </article>
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-4"><span>🌸</span></div>
+        <div class="produk-info">
+          <h3>Peony Awan</h3>
+          <p>Peony pink yang penuh dan mewah dalam satu buket besar.</p>
+          <div class="produk-bawah"><span class="harga">Rp 295.000</span><button class="btn-keranjang" type="button" data-nama="Peony Awan">+ Keranjang</button></div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Panel 2: Bunga Box -->
+    <div id="tab-box" class="tab-panel grid-produk">
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-5"><span>🌹</span></div>
+        <div class="produk-info">
+          <h3>Box Mawar Merah</h3>
+          <p>Mawar merah segar tertata rapi dalam box bundar.</p>
+          <div class="produk-bawah"><span class="harga">Rp 250.000</span><button class="btn-keranjang" type="button" data-nama="Box Mawar Merah">+ Keranjang</button></div>
+        </div>
+      </article>
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-1"><span>🌸</span></div>
+        <div class="produk-info">
+          <h3>Box Pastel</h3>
+          <p>Perpaduan bunga warna pastel dalam box lembut.</p>
+          <div class="produk-bawah"><span class="harga">Rp 235.000</span><button class="btn-keranjang" type="button" data-nama="Box Pastel">+ Keranjang</button></div>
+        </div>
+      </article>
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-2"><span>🌷</span></div>
+        <div class="produk-info">
+          <h3>Box Tulip</h3>
+          <p>Tulip segar dalam box, cocok untuk meja kerja.</p>
+          <div class="produk-bawah"><span class="harga">Rp 265.000</span><button class="btn-keranjang" type="button" data-nama="Box Tulip">+ Keranjang</button></div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Panel 3: Pernikahan -->
+    <div id="tab-wedding" class="tab-panel grid-produk">
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-3"><span>💍</span></div>
+        <div class="produk-info">
+          <h3>Hand Bouquet Bridal</h3>
+          <p>Buket genggam pengantin dengan bunga putih dan hijau.</p>
+          <div class="produk-bawah"><span class="harga">Rp 350.000</span><button class="btn-keranjang" type="button" data-nama="Hand Bouquet Bridal">+ Keranjang</button></div>
+        </div>
+      </article>
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-4"><span>🤍</span></div>
+        <div class="produk-info">
+          <h3>Buket Pengantin Putih</h3>
+          <p>Rangkaian mawar dan lisianthus putih yang anggun.</p>
+          <div class="produk-bawah"><span class="harga">Rp 420.000</span><button class="btn-keranjang" type="button" data-nama="Buket Pengantin Putih">+ Keranjang</button></div>
+        </div>
+      </article>
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-1"><span>🌸</span></div>
+        <div class="produk-info">
+          <h3>Dekor Meja Akad</h3>
+          <p>Rangkaian bunga meja untuk prosesi akad atau lamaran.</p>
+          <div class="produk-bawah"><span class="harga">Rp 380.000</span><button class="btn-keranjang" type="button" data-nama="Dekor Meja Akad">+ Keranjang</button></div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Panel 4: Hadiah -->
+    <div id="tab-hadiah" class="tab-panel grid-produk">
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-2"><span>🧸</span></div>
+        <div class="produk-info">
+          <h3>Buket + Boneka</h3>
+          <p>Buket mawar mini ditemani boneka beruang lucu.</p>
+          <div class="produk-bawah"><span class="harga">Rp 275.000</span><button class="btn-keranjang" type="button" data-nama="Buket + Boneka">+ Keranjang</button></div>
+        </div>
+      </article>
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-5"><span>🍫</span></div>
+        <div class="produk-info">
+          <h3>Buket + Cokelat</h3>
+          <p>Perpaduan bunga segar dan cokelat premium.</p>
+          <div class="produk-bawah"><span class="harga">Rp 245.000</span><button class="btn-keranjang" type="button" data-nama="Buket + Cokelat">+ Keranjang</button></div>
+        </div>
+      </article>
+      <article class="produk">
+        <button class="fav" type="button" aria-label="Tambah ke favorit">♡</button>
+        <div class="produk-foto bg-4"><span>🎓</span></div>
+        <div class="produk-info">
+          <h3>Buket Wisuda</h3>
+          <p>Buket ceria untuk merayakan kelulusan.</p>
+          <div class="produk-bawah"><span class="harga">Rp 210.000</span><button class="btn-keranjang" type="button" data-nama="Buket Wisuda">+ Keranjang</button></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== PROMO + FORM NEWSLETTER KECIL ===== -->
+  <section class="container promo-grid">
+    <div class="promo promo-1">
+      <h3>Diskon 10% <small>untuk pesanan pertama</small></h3>
+      <p>Berlangganan info promo dan dapatkan kodenya.</p>
+      <form id="formPromo" class="promo-form" novalidate>
+        <div class="promo-input">
+          <input type="text" id="emailPromo" name="emailPromo" placeholder="Email Anda">
+          <button type="submit" aria-label="Kirim">➜</button>
+        </div>
+      </form>
+    </div>
+    <div class="promo promo-2">
+      <h3>Gratis Ongkir <small>untuk belanja di atas Rp 300.000</small></h3>
+      <p>Berlaku untuk pengiriman dalam kota setiap hari.</p>
+      <span class="promo-emoji">🛵</span>
+    </div>
+    <div class="promo promo-3">
+      <h3>Kartu Ucapan Gratis <small>untuk setiap buket</small></h3>
+      <p>Tuliskan pesan hangatmu, kami yang menyertakannya.</p>
+      <span class="promo-emoji">💌</span>
+    </div>
+  </section>
+
+  <!-- ===== TENTANG ===== -->
+  <section id="tentang" class="container seksi">
+    <div class="tentang-card">
+      <div class="tentang-foto"><span>🌷</span></div>
+      <div class="tentang-teks">
+        <span class="script">Halo, kami Rosaria!</span>
+        <h2>Merangkai Bunga, Merangkai Cerita</h2>
+        <p>Rosaria Florist hadir untuk membantu kamu menyampaikan rasa lewat bunga. Dari ulang tahun, wisuda, hingga pernikahan, setiap buket dirangkai dengan teliti dari bunga segar pilihan.</p>
+        <a href="#pesan" class="btn-utama kecil">Pesan Sekarang</a>
+      </div>
+      <div class="catatan">
+        <span class="klip">📎</span>
+        <small>Pengingat</small>
+        <p>setiap bunga<br>punya cerita<br>untuk disampaikan ♡</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FORM PEMESANAN (jQuery Validation Plugin, 9 input) ===== -->
+  <section id="pesan" class="seksi-form">
+    <div class="container">
+      <div class="judul-seksi">
+        <span class="script">kirim kebahagiaan</span>
+        <h2>Pesan Buket Sekarang</h2>
+      </div>
+
+      <form id="formPesan" class="form-box" novalidate>
+        <div class="baris-2">
+          <div class="form-group">
+            <label for="nama">Nama Pemesan</label>
+            <input type="text" id="nama" name="nama" placeholder="Nama lengkap">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="nama@email.com">
+          </div>
+        </div>
+
+        <div class="baris-2">
+          <div class="form-group">
+            <label for="hp">Nomor WhatsApp / HP</label>
+            <input type="text" id="hp" name="hp" placeholder="10-13 digit angka">
+          </div>
+          <div class="form-group">
+            <label for="jenis">Pilih Buket</label>
+            <select id="jenis" name="jenis">
+              <option value="">-- Pilih buket --</option>
+              <option>Kelembutan</option>
+              <option>Romansa</option>
+              <option>Putih Klasik</option>
+              <option>Peony Awan</option>
+              <option>Box Mawar Merah</option>
+              <option>Box Pastel</option>
+              <option>Hand Bouquet Bridal</option>
+              <option>Buket + Boneka</option>
+              <option>Buket Wisuda</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="baris-2">
+          <div class="form-group">
+            <label for="tanggal">Tanggal Pengiriman</label>
+            <input type="date" id="tanggal" name="tanggal">
+          </div>
+          <div class="form-group">
+            <label for="jumlah">Jumlah Buket</label>
+            <input type="text" id="jumlah" name="jumlah" value="1" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="alamat">Alamat Pengiriman</label>
+          <textarea id="alamat" name="alamat" rows="3" placeholder="Nama jalan, nomor rumah, kecamatan, patokan"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="kartu">Pesan Kartu Ucapan <span class="opsional">(opsional, maks. 120 karakter)</span></label>
+          <textarea id="kartu" name="kartu" rows="2" placeholder="Contoh: Selamat ulang tahun, semoga selalu bahagia!"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="cek"><input type="checkbox" id="setuju" name="setuju"> Saya setuju data pesanan ini dipakai untuk keperluan pengiriman.</label>
+        </div>
+
+        <button type="submit" class="btn-utama penuh">Kirim Pesanan</button>
+
+        <div class="sukses" id="sukses">
+          <strong>Pesanan Diterima!</strong>
+          <p>Terima kasih, <span id="suksesNama"></span>. <span id="suksesDetail"></span> Kami akan menghubungi lewat WhatsApp untuk konfirmasi.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="kontak" class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="logo logo-footer"><span class="logo-ikon">🌸</span><span class="logo-teks"><strong>Rosaria</strong><small>bunga dengan cinta</small></span></div>
+        <p class="footer-ket">Kami merangkai buket yang menyampaikan perasaanmu.</p>
+        <p class="sosial"><a href="#">Instagram</a> · <a href="#">TikTok</a> · <a href="#">WhatsApp</a></p>
+      </div>
+      <div>
+        <h5>Katalog</h5>
+        <ul>
+          <li><a href="#katalog" data-tab="#tab-buket">Buket</a></li>
+          <li><a href="#katalog" data-tab="#tab-box">Bunga Box</a></li>
+          <li><a href="#katalog" data-tab="#tab-wedding">Pernikahan</a></li>
+          <li><a href="#katalog" data-tab="#tab-hadiah">Hadiah</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Pembeli</h5>
+        <ul>
+          <li><a href="#pesan">Cara Pesan</a></li>
+          <li><a href="#pesan">Pengiriman</a></li>
+          <li><a href="#pesan">Garansi</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kontak</h5>
+        <ul>
+          <li>📞 +62 812-3456-7890</li>
+          <li>🕗 Setiap hari 08.00 - 21.00</li>
+          <li>✉️ halo@rosaria.example</li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2026 Rosaria Florist | Novitasari - Tugas Mandiri Praktikum Pemrograman Web Dasar</p>
+  </footer>
+
+  <!-- Elemen bantu -->
+  <div id="toast"></div>
+  <button id="backToTop" type="button" aria-label="Kembali ke atas">&#8593;</button>
+
+  <!-- JavaScript eksternal -->
+  <script src="script.js"></script>
+</body>
+</html>
